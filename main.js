@@ -1,4 +1,5 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, Menu, Tray } = require('electron')
+
 
 function createWindow () {
   // Create the browser window.
@@ -6,9 +7,23 @@ function createWindow () {
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true
+    nodeIntegration: true
     }
   })
+  
+  tray = new Tray('icon/icon.png')
+
+  const contextMenu = Menu.buildFromTemplate([
+    { label: 'nnormalnormalnormalnormalnormalnormalnormalormal', type: 'normal' },
+    { label: 'separator', type: 'separator' },
+    { label: 'radio', type: 'radio', checked: true },
+    //{ label: 'submenu', type: 'submenu' },
+    { label: 'checkbox', type: 'checkbox' }
+
+  ])
+
+  tray.setToolTip('This is my app')
+  tray.setContextMenu(contextMenu)
 
   // and load the index.html of the app.
   win.loadFile('index.html')
